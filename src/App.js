@@ -1,9 +1,10 @@
 import './App.css';
 import { useState } from 'react';
-
 import Saludo from './components/saludo';
 import SaludoComponente from './components/saludoComponente';
 import SaludoState from './components/saludoState';
+
+
 
 function App() {
 
@@ -12,9 +13,10 @@ function App() {
   const [informacion, setInformacion] = useState('');
 
   const busquedaCiudad=(valorObjeto)=>{
-    debugger;
+    //debugger;
     console.log(valorObjeto.target.value);
     setInformacion(valorObjeto.target.value);
+    console.log(""+ process.env.REACT_APP_API_KEY_OPENWEATHER);
   }
 
 
