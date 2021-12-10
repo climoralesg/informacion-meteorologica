@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Saludo from './components/saludo';
 import SaludoComponente from './components/saludoComponente';
 import SaludoState from './components/saludoState';
+import City from './components/City';
 
 
 
@@ -41,7 +42,7 @@ function App() {
         {informacion}
       </span>  
     </div>
-
+    <City lang="es" unit="metric"/>
     </div>
   );
 }
