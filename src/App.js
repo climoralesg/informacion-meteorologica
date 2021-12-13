@@ -1,4 +1,5 @@
-import './App.css';
+//import './App.css';
+import './style/main.css'
 import { useState } from 'react';
 import Saludo from './components/saludo';
 import SaludoComponente from './components/saludoComponente';
@@ -25,6 +26,7 @@ function App() {
     <div className="App">
     {/*<SaludoState nombre="Juan Peras" contador={4}/>*/}
 
+    {/*
     <select>
       <option value="coronel">Coronel</option>
       <option value="concepcion">Concepcion</option>
@@ -42,7 +44,8 @@ function App() {
         {informacion}
       </span>  
     </div>
-    <City lang="es" unit="metric"/>
+    */}
+    <City lang="es" units="metric"/>
     </div>
   );
 }

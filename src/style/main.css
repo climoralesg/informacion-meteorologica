@@ -1,0 +1,22 @@
+.cuadroContenido{
+    background: #5DEAA8;
+    height: 150px;
+    width: 150px;
+    /*IMPORTANTE*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.cuadroConsulta{
+  height: 150px;
+  /*IMPORTANTE*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.weatherImage{
+    width: 50%;
+}
