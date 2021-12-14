@@ -11,12 +11,12 @@ class City extends Component{
             city:'',
             units:this.props.units,
             lang:this.props.lang,
-            weather:'',
+            weather:'Clouds',
             temperature:''
         }
 
       this.requestCityInfo = this.requestCityInfo.bind(this);
-
+     
     }
 
 
@@ -27,11 +27,11 @@ class City extends Component{
     }
 
 
-    requestCityInfo=()=>{
+    requestCityInfo=()=>{<a class="nes-btn" href="#">Normal</a>
 
         let valor=(this.state.city.charAt(0).toUpperCase())+(this.state.city.slice(1));
         //console.log(" ",this.state.city);
-    
+        var self = this;
         axios({
             method:'get',
             url:'https://api.openweathermap.org/data/2.5/weather?',
@@ -44,8 +44,10 @@ class City extends Component{
             }
         }).then(function(response){
             console.log(response.data);
-            //this.state.weather=response.data.weather[0].main; //modificacion de dato state para imagen
-            console.log(response.data.weather[0].main);
+            self.setState({
+                weather: response.data.weather[0].main,
+                temperature:response.data.main.temp+' °c'
+            });
         })
     
     }
@@ -60,7 +62,9 @@ class City extends Component{
                 </div> 
                 <div className="cuadroContenido">
                     <img className="weatherImage" src={"./icons/"+this.state.weather+".png"}/>
+                    <a className="nes-btn temperature">{this.state.temperature}</a>
                 </div>  
+                
             
             </div>
             
