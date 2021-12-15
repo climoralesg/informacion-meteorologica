@@ -1,22 +1,52 @@
-.cuadroContenido{
-    background: #5DEAA8;
-    height: 150px;
-    width: 150px;
-    /*IMPORTANTE*/
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
+.App{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px;
 }
+.cuadroInicial{
+  
+  margin: 25px;
+  width: 50%;
 
+}
 .cuadroConsulta{
-  height: 150px;
+  height: 100px;
   /*IMPORTANTE*/
   display: flex;
   justify-content: center;
   align-items: center;
+ 
 }
 
+.inputCity{
+  width: 200px;
+  font-size:smaller;
+  margin-right: 10px;
+}
+
+.query{
+  width: 200px;
+}
+
+.cuadroContenido{
+  background: #6EC2FA;
+  height: 150px;
+  width: 150px;
+  /*IMPORTANTE*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 150px;
+  margin: 0 auto;
+  flex-direction: column;
+}
+
+
 .weatherImage{
-    width: 50%;
+  width: 100px;
+}
+
+.temperature{
+  margin: 15px;
 }

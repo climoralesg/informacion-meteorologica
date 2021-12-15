@@ -12,7 +12,7 @@ class City extends Component{
             units:this.props.units,
             lang:this.props.lang,
             weather:'Clouds',
-            temperature:''
+            temperature:'Temperatura'
         }
 
       this.requestCityInfo = this.requestCityInfo.bind(this);
@@ -54,20 +54,27 @@ class City extends Component{
 
     render(){
         return(
-            <div>
+    
+
+            <div class="nes-container with-title is-centered cuadroInicial">
+                <p class="title">Consulta Meteorologica</p>
+
                 <div className="cuadroConsulta">
-                    
-                    <input type="text" onChange={(e)=>this.setCity(e)} name="city" placeholder="Ingresa tu ciudad"/>  
-                    <button type="button" className="nes-btn is-primary" onClick={this.requestCityInfo}>Consulta</button>
+
+                    <input type="text" id="inline_field" name="city" className="nes-input inputCity" onChange={(e)=>this.setCity(e)} placeholder="Ciudad"/>
+
+                    {/*<input className="inputCity" type="text" onChange={(e)=>this.setCity(e)} name="city" placeholder="Ciudad"/> */} 
+                    <button type="button" className="nes-btn is-success query" onClick={this.requestCityInfo}>Consultar</button>
                 </div> 
                 <div className="cuadroContenido">
+                    
                     <img className="weatherImage" src={"./icons/"+this.state.weather+".png"}/>
                     <a className="nes-btn temperature">{this.state.temperature}</a>
                 </div>  
                 
             
             </div>
-            
+   
         )
     }
 
