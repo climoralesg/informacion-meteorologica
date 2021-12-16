@@ -12,7 +12,8 @@ class City extends Component{
             units:this.props.units,
             lang:this.props.lang,
             weather:'Clouds',
-            temperature:'Temperatura'
+            temperature:'Temperatura',
+            icon:''
         }
 
       this.requestCityInfo = this.requestCityInfo.bind(this);
@@ -44,9 +45,11 @@ class City extends Component{
             }
         }).then(function(response){
             console.log(response.data);
+            //let temperatura=response.data.main.temp..replace(/\n|\r/g, "");
             self.setState({
                 weather: response.data.weather[0].main,
-                temperature:response.data.main.temp+' °c'
+                icon: response.data.weather[0].icon,
+                temperature:(response.data.main.temp+"°c")
             });
         })
     
@@ -68,7 +71,7 @@ class City extends Component{
                 </div> 
                 <div className="cuadroContenido">
                     
-                    <img className="weatherImage" src={"./icons/"+this.state.weather+".png"}/>
+                    <img className="weatherImage" src={"http://openweathermap.org/img/wn/"+this.state.icon+"@4x.png"}/>
                     <a className="nes-btn temperature">{this.state.temperature}</a>
                 </div>  
                 

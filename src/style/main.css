@@ -30,7 +30,7 @@
 }
 
 .cuadroContenido{
-  background: #6EC2FA;
+  background: #23A17B;
   height: 150px;
   width: 150px;
   /*IMPORTANTE*/
@@ -44,9 +44,5 @@
 
 
 .weatherImage{
-  width: 100px;
-}
-
-.temperature{
-  margin: 15px;
+  width: 200px;
 }
