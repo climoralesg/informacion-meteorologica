@@ -8,12 +8,13 @@ class City extends Component{
         super(props);
     
         this.state={
-            city:'',
+            city:'Ciudad',
             units:this.props.units,
             lang:this.props.lang,
             weather:'Clouds',
             temperature:'Temperatura',
-            icon:''
+            description:'',
+            icon:'02d'
         }
 
       this.requestCityInfo = this.requestCityInfo.bind(this);
@@ -46,10 +47,12 @@ class City extends Component{
         }).then(function(response){
             console.log(response.data);
             //let temperatura=response.data.main.temp..replace(/\n|\r/g, "");
+            let description=response.data.weather[0].description.charAt(0).toUpperCase()+response.data.weather[0].description.slice(1);
             self.setState({
                 weather: response.data.weather[0].main,
                 icon: response.data.weather[0].icon,
-                temperature:(response.data.main.temp+"°c")
+                temperature:(response.data.main.temp+"°c"),
+                description:description
             });
         })
     
@@ -63,15 +66,16 @@ class City extends Component{
                 <p class="title">Consulta Meteorologica</p>
 
                 <div className="cuadroConsulta">
-
+                    
                     <input type="text" id="inline_field" name="city" className="nes-input inputCity" onChange={(e)=>this.setCity(e)} placeholder="Ciudad"/>
 
                     {/*<input className="inputCity" type="text" onChange={(e)=>this.setCity(e)} name="city" placeholder="Ciudad"/> */} 
                     <button type="button" className="nes-btn is-success query" onClick={this.requestCityInfo}>Consultar</button>
                 </div> 
                 <div className="cuadroContenido">
-                    
+                    <p className="title comuna">{this.state.city}</p>
                     <img className="weatherImage" src={"http://openweathermap.org/img/wn/"+this.state.icon+"@4x.png"}/>
+                    <p className="title comuna">{this.state.description}</p>
                     <a className="nes-btn temperature">{this.state.temperature}</a>
                 </div>  
                 
