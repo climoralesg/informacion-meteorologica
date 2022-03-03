@@ -29,7 +29,7 @@ class City extends Component{
     }
 
 
-    requestCityInfo=()=>{<a class="nes-btn" href="#">Normal</a>
+    requestCityInfo=()=>{
 
         let valor=(this.state.city.charAt(0).toUpperCase())+(this.state.city.slice(1));
         //console.log(" ",this.state.city);
