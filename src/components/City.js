@@ -25,14 +25,12 @@ class City extends Component{
     
     setCity (valueObject) {
         this.setState({[valueObject.target.name]: valueObject.target.value});
-        //console.log(this.state.city);
     }
 
 
     requestCityInfo=()=>{
 
         let valor=(this.state.city.charAt(0).toUpperCase())+(this.state.city.slice(1));
-        //console.log(" ",this.state.city);
         var self = this;
         axios({
             method:'get',
@@ -45,8 +43,6 @@ class City extends Component{
                 appid:process.env.REACT_APP_API_KEY_OPENWEATHER
             }
         }).then(function(response){
-            console.log(response.data);
-            //let temperatura=response.data.main.temp..replace(/\n|\r/g, "");
             let description=response.data.weather[0].description.charAt(0).toUpperCase()+response.data.weather[0].description.slice(1);
             self.setState({
                 weather: response.data.weather[0].main,
