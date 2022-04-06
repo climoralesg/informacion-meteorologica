@@ -1,6 +1,5 @@
 //import './App.css';
 import './style/main.css'
-import { useState } from 'react';
 import City from './components/City';
 
 
