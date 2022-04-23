@@ -21,10 +21,43 @@ class City extends Component{
      
     }
 
+    componentDidMount(){
+        navigator.geolocation.getCurrentPosition(position => {
+            const { latitude, longitude } = position.coords;
+            // Show a map centered at latitude / longitude.
+            console.log(position.coords);
+            var self=this;
+            axios({
+                method:'get',
+                url:'https://api.openweathermap.org/data/2.5/weather?',
+                responseType:'json',
+                params:{
+                    lat:latitude,
+                    lon:longitude,
+                    lang:this.state.lang,
+                    units: this.state.units,
+                    appid:process.env.REACT_APP_API_KEY_OPENWEATHER
+                }
+            }).then(function(response){
+                let description=response.data.weather[0].description.charAt(0).toUpperCase()+response.data.weather[0].description.slice(1);
 
+                self.setState({
+                    city:response.data.name,
+                    weather: response.data.weather[0].main,
+                    icon: response.data.weather[0].icon,
+                    temperature:(response.data.main.temp+"°c"),
+                    description:description
+                });
+            });
+
+        });
     
-    setCity (valueObject) {
-        this.setState({[valueObject.target.name]: valueObject.target.value});
+    }
+    
+    setCity (valueObject){
+        if ( !/\d/.test(valueObject.target.value.trim())) {
+            this.setState({[valueObject.target.name]: valueObject.target.value});
+        }
     }
 
 
@@ -58,8 +91,8 @@ class City extends Component{
         return(
     
 
-            <div class="nes-container with-title is-centered cuadroInicial">
-                <p class="title">Consulta Meteorologica</p>
+            <div className="nes-container with-title is-centered cuadroInicial">
+                <p className="title">Consulta Meteorologica</p>
 
                 <div className="cuadroConsulta">
                     
