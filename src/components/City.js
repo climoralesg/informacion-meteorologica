@@ -14,7 +14,8 @@ class City extends Component{
             weather:'',
             temperature:'Temperatura',
             description:'',
-            icon:''
+            icon:'',
+            cityQuery:'',
         }
 
       this.requestCityInfo = this.requestCityInfo.bind(this);
@@ -24,8 +25,6 @@ class City extends Component{
     componentDidMount(){
         navigator.geolocation.getCurrentPosition(position => {
             const { latitude, longitude } = position.coords;
-            // Show a map centered at latitude / longitude.
-            console.log(position.coords);
             var self=this;
             axios({
                 method:'get',
@@ -56,7 +55,7 @@ class City extends Component{
     
     setCity (valueObject){
         if ( !/\d/.test(valueObject.target.value.trim())) {
-            this.setState({[valueObject.target.name]: valueObject.target.value});
+            this.setState({cityQuery: valueObject.target.value});
         }else{
             this.setState({[valueObject.target.name]: "No puedes ingresar numeros"});
         }
@@ -65,38 +64,50 @@ class City extends Component{
 
     requestCityInfo=()=>{
 
-        let valor=(this.state.city.charAt(0).toUpperCase())+(this.state.city.slice(1));
+        let valor=(this.state.cityQuery.charAt(0).toUpperCase())+(this.state.cityQuery.slice(1));
         var self = this;
-        axios({
-            method:'get',
-            defaultValue: "false",
-            url:'https://api.openweathermap.org/data/2.5/weather?',
-            responseType:'json',
-            params:{
-                q:valor,
-                lang:this.state.lang,
-                units: this.state.units,
-                appid:process.env.REACT_APP_API_KEY_OPENWEATHER
-            }
-        }).then(function(response){
-            let description=response.data.weather[0].description.charAt(0).toUpperCase()+response.data.weather[0].description.slice(1);
+        if(this.state.cityQuery===''){
             self.setState({
-                weather: response.data.weather[0].main,
-                icon: response.data.weather[0].icon,
-                temperature:(response.data.main.temp+"°c"),
-                description:description
+                city:'Ingrese una ciudad',
+                weather: '-',
+                icon: '',
+                temperature:'-',
+                description:'-'
             });
-        }).catch((error)=>{
-            if(error.response.data.cod==="404"){
+        }else{
+            
+            axios({
+                method:'get',
+                defaultValue: "false",
+                url:'https://api.openweathermap.org/data/2.5/weather?',
+                responseType:'json',
+                params:{
+                    q:valor,
+                    lang:this.state.lang,
+                    units: this.state.units,
+                    appid:process.env.REACT_APP_API_KEY_OPENWEATHER
+                }
+            }).then(function(response){
+                let description=response.data.weather[0].description.charAt(0).toUpperCase()+response.data.weather[0].description.slice(1);
                 self.setState({
-                    city:'Ciudad no encontrada',
-                    weather: '-',
-                    icon: '',
-                    temperature:'-',
-                    description:'-'
+                    weather: response.data.weather[0].main,
+                    icon: response.data.weather[0].icon,
+                    temperature:(response.data.main.temp+"°c"),
+                    description:description
                 });
-            }
-        })
+            }).catch((error)=>{
+                if(error.response.data.cod==="404"){
+                    self.setState({
+                        city:'Ciudad no encontrada',
+                        weather: '-',
+                        icon: '',
+                        temperature:'-',
+                        description:'-'
+                    });
+                }
+            })
+        }
+   
     
     }
 
