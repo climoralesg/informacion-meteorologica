@@ -11,10 +11,10 @@ class City extends Component{
             city:'Ciudad',
             units:this.props.units,
             lang:this.props.lang,
-            weather:'Clouds',
+            weather:'',
             temperature:'Temperatura',
             description:'',
-            icon:'02d'
+            icon:''
         }
 
       this.requestCityInfo = this.requestCityInfo.bind(this);
@@ -57,6 +57,8 @@ class City extends Component{
     setCity (valueObject){
         if ( !/\d/.test(valueObject.target.value.trim())) {
             this.setState({[valueObject.target.name]: valueObject.target.value});
+        }else{
+            this.setState({[valueObject.target.name]: "No puedes ingresar numeros"});
         }
     }
 
@@ -67,6 +69,7 @@ class City extends Component{
         var self = this;
         axios({
             method:'get',
+            defaultValue: "false",
             url:'https://api.openweathermap.org/data/2.5/weather?',
             responseType:'json',
             params:{
@@ -83,14 +86,29 @@ class City extends Component{
                 temperature:(response.data.main.temp+"°c"),
                 description:description
             });
+        }).catch((error)=>{
+            if(error.response.data.cod==="404"){
+                self.setState({
+                    city:'Ciudad no encontrada',
+                    weather: '-',
+                    icon: '',
+                    temperature:'-',
+                    description:'-'
+                });
+            }
         })
     
     }
 
     render(){
+
+        let image;
+        if(this.state.icon!==''){
+            image=<img className="weatherImage" src={"http://openweathermap.org/img/wn/"+this.state.icon+"@4x.png"}/>
+        }
+
         return(
     
-
             <div className="nes-container with-title is-centered cuadroInicial">
                 <p className="title">Consulta Meteorologica</p>
 
@@ -101,9 +119,10 @@ class City extends Component{
                     {/*<input className="inputCity" type="text" onChange={(e)=>this.setCity(e)} name="city" placeholder="Ciudad"/> */} 
                     <button type="button" className="nes-btn is-success query" onClick={this.requestCityInfo}>Consultar</button>
                 </div> 
+
                 <div className="cuadroContenido">
                     <p className="title comuna">{this.state.city}</p>
-                    <img className="weatherImage" src={"http://openweathermap.org/img/wn/"+this.state.icon+"@4x.png"}/>
+                    {image}
                     <p className="title comuna">{this.state.description}</p>
                     <a className="nes-btn temperature">{this.state.temperature}</a>
                 </div>  
