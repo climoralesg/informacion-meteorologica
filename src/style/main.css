@@ -41,6 +41,7 @@
 
 .weatherImage{
   width: 200px;
+  transition: 1s;
 }
 
 .temperature{
@@ -50,4 +51,41 @@
 .comuna{
   color: #4CEDBD;
   padding-top: 10px;
+}
+
+
+
+@media (max-width:768px){
+  
+  .query{
+    margin: 20px;
+  }
+
+  .inputCity{
+    margin: 20px;
+  }
+
+  .cuadroContenido{
+    background: #23A17B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+    flex-direction: column;
+    padding-top: 20px;
+  }
+  
+
+
+  .cuadroConsulta{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
+  .cuadroInicial{
+    justify-content: grid;
+    margin: 10px;
+    width: 100%;
+  
+  }
 }
