@@ -93,7 +93,8 @@ class City extends Component{
                     weather: response.data.weather[0].main,
                     icon: response.data.weather[0].icon,
                     temperature:(response.data.main.temp+"°c"),
-                    description:description
+                    description:description,
+                    city:response.data.name
                 });
             }).catch((error)=>{
                 if(error.response.data.cod==="404"){
